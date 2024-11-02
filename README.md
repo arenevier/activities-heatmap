@@ -114,6 +114,13 @@ Unfortunately, moving the computation to a web worker would not improve the
 situation, since the serialization/deserialization of the paths would take
 longer than the computation itself.
 
+## Demo
+
+The website at https://heatmap.renevier.net/ is a simple application that uses
+this library. It displays a heatmap of the author's list of Strava activities
+from 2018 to 2024. The code source is available at
+https://github.com/arenevier/heatmap-demo
+
 ## For reference:
 strava blog about the implementation of the global heatmap:
 https://medium.com/strava-engineering/the-global-heatmap-now-6x-hotter-23fc01d301de
