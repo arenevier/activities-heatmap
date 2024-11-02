@@ -1,6 +1,6 @@
 {
   "name": "activities-heatmap",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A library to draw sport activities heatmap on a tile layer.",
   "main": "dist/index.js",
   "repository": {
