@@ -1,6 +1,8 @@
 import type pg from "pg";
 import type { ActivitiesSource } from "../types";
 
+type PGPoolOrClient = Pick<pg.Client, "query"> | Pick<pg.PoolClient, "query">;
+
 /**
  * An ActivitiesSource that reads activities from a PostgreSQL database with
  * PostGIS enabled. The database must contain a table with the following
@@ -10,15 +12,15 @@ import type { ActivitiesSource } from "../types";
  *   - a column named sport_type, containing a string
  */
 export class PostgisDB implements ActivitiesSource {
-  #client: Pick<pg.Client, "query">;
+  #client: PGPoolOrClient;
   #tableName: string;
   #inited = false;
 
   /**
-   * @param client - A pg.Client connected to the database.
+   * @param client - A pg.Client connected to the database, or a pg.Pool
    * @param tableName - The name of the table containing the activities.
    */
-  constructor(client: Pick<pg.Client, "query">, tableName: string) {
+  constructor(client: PGPoolOrClient, tableName: string) {
     this.#client = client;
     this.#tableName = tableName;
   }
