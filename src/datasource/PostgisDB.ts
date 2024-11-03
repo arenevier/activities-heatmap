@@ -17,7 +17,8 @@ export class PostgisDB implements ActivitiesSource {
   #inited = false;
 
   /**
-   * @param client - A pg.Client connected to the database, or a pg.Pool
+   * @param client - A pg.Pool, or a pg.Client connected to the database.
+   *  Passing a pg.Pool is more performant and is recommended.
    * @param tableName - The name of the table containing the activities.
    */
   constructor(client: PGPoolOrClient, tableName: string) {
