@@ -101,7 +101,7 @@ export class PostgisDB implements ActivitiesSource {
       sportTypes?: Array<string>;
     }>,
   ) {
-    const query = `SELECT ST_ASGeoJson(ST_Intersection(geom, ST_MakeEnvelope($1, $2, $3, $4, 4326))) AS geom from ${this.#tableName}`;
+    const query = `SELECT ST_ASGeoJson(ST_ClipByBox2D(geom, ST_MakeEnvelope($1, $2, $3, $4, 4326))) AS geom from ${this.#tableName}`;
     const { clauses, values } = this.#buildWhereClauses(5, filter);
     if (clauses.length === 0) {
       return {
@@ -130,7 +130,7 @@ export class PostgisDB implements ActivitiesSource {
     const res: Array<GeoJSON.Position[]> = [];
     for (const row of result.rows) {
       const geom = JSON.parse(row.geom);
-      if (geom.coordinates.length === 0) {
+      if (geom.geometries?.length === 0) {
         continue;
       }
 
